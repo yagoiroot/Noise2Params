@@ -1,0 +1,38 @@
+# Conda mirror of requirements.txt.  Use if you prefer conda over venv.
+#
+#   conda env create -f environment.yml
+#   conda activate noise2params
+
+name: noise2params
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy=1.26.4
+  - numba=0.59.1
+  - scipy=1.13.1
+  - polars=1.32.2
+  - h5py
+  - pillow
+  - matplotlib=3.10.5
+  - scikit-image=0.20.0
+  - opencv
+  - sympy
+  - mpmath
+  - tqdm
+  - pip
+  - pip:
+      # Training-environment packages (install torch separately if you
+      # need a specific CUDA build):
+      - torch
+      - torchvision
+      - "torchmetrics<1.8.0"
+      - "lightning~=2.1.0"
+      - "denoising-diffusion-pytorch==1.10.7"
+      - einops
+      - piq
+      # Optional learned metrics (uncomment to install):
+      # - lpips
+      # - dreamsim
+      # - pyiqa

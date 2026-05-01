@@ -1,0 +1,67 @@
+# Noise2Params — published parameter values.
+#
+# These are the exact fit parameters used to generate the shipped synthetic
+# datasets (data_5e6_5 for the saddle-point model, data_5e6_6 for the
+# Gaussian model) and the CNN training runs that produced the paper's
+# reconstruction-quality comparisons.  They are set as the *defaults*
+# inside event_noise_image_modeler_core() and synthetic_data_base_maker(),
+# so you typically do not need to override them — this file is a
+# reference snapshot.
+#
+# See docs/PAPER_CROSSREF.md for the paper-symbol <-> code-variable mapping.
+
+noise_model:
+  # Probability model.  The paper's deep-learning comparisons include
+  # saddle-point (primary) and Gaussian (ablation).  The Poisson code
+  # path is retained in the codebase for reproducibility but no shipped
+  # dataset uses it; see docs/DATA.md.
+  model: saddle                 # {saddle, Gaussian, Poisson}
+
+  # Event-integration window (paper: 5 s).
+  time_steps_us: 5000000        # microseconds
+  dead_time_us: 79              # Prophesee EVK4 refractory period R
+
+  # Lux-to-photon conversion.
+  alpha: 4.5
+
+  # Per-pixel log-contrast threshold.  Drawn from a truncated normal
+  # N(B, B_sigma^2) on [0, +inf) at synthetic-image generation time.
+  B: 0.15
+  B_sigma: 0.00651              # published value; 0.006 for Poisson branch
+  uniform_pixels: false
+
+  # Intensity-dependent leakage theta(lambda) = c1 + c2*sqrt(lambda) + c3*lambda.
+  # Separate fits for positive and negative events.
+  params_pos: [18.917319991515015, 35.49036559887983,   0.4394373558876216]
+  params_neg: [16.41747084565865,  37.42249743893243,   0.06759986822465787]
+
+  # Additive probability floor ("dark count").
+  vert_offset_pos: 9.567536526687546e-09
+  vert_offset_neg: 3.178722048504662e-08
+
+  # Greyscale -> illuminance (lux) polynomial coefficients
+  #   I_lux = a * I_gs**b + c
+  # Coefficients fit against the lab's lux-meter calibration.
+  int_mapping: mine             # {mine, N2I}
+  int_mapping_coef: [2.14990578e-05, 2.52106648, 0.15]
+
+  # Event-count sampling approach.  'NB sampling' is a historical name —
+  # the active branch is Binomial(T, m_eff).  Published synthetic datasets
+  # use this.
+  approach: NB sampling         # {raw, expectations, poisson sampling, NB sampling}
+  combine_polarities: false
+  cap_or_norm: norm
+  sample_theta: false
+
+# Per-pair data augmentation applied during dataset construction
+# (synthetic_data_base_maker / real_data_base_maker).
+augmentation:
+  num_variations: 2             # random augmentations per source image
+  apply_brightness_aug: false   # [0.7, 1.3] multiplier; paper: disabled
+  crop_or_resize: rand          # {rand, crop, resize}
+  pixel_bin: 2                  # 2x2 block-averaging post-generation
+
+# Input image dimensions.  Pre-binning 720 x 1280, post-binning 360 x 640.
+image_dimensions:
+  full_hw: [720, 1280]
+  binned_hw: [360, 640]

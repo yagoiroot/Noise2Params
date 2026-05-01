@@ -1,0 +1,32 @@
+# Citation metadata for this repository.  This is a placeholder — once
+# the Noise2Params paper has a DOI / preprint identifier, fill in the
+# `doi:` field and update the preferred-citation block below.
+cff-version: 1.2.0
+message: "If you use this code, please cite the accompanying Noise2Params paper."
+title: "Noise2Params — Public Reconstruction Code"
+type: software
+authors:
+  - family-names: Root
+    given-names: Owen
+    affiliation: "Department of Physics and Astronomy, CUNY Hunter College"
+  - family-names: Mujo
+    given-names: Julinda
+    affiliation: "Department of Physics and Astronomy, CUNY Hunter College"
+  - family-names: Xu
+    given-names: Min
+    affiliation: "Department of Physics and Astronomy, CUNY Hunter College"
+repository-code: ""         # fill in when public
+license: ""                 # see LICENSE
+preferred-citation:
+  type: article
+  title: "Noise2Params: Unification and Parameter Determination from Noise via a Probabilistic Event Camera Model"
+  authors:
+    - family-names: Root
+      given-names: Owen
+    - family-names: Mujo
+      given-names: Julinda
+    - family-names: Xu
+      given-names: Min
+  year: 2026
+  # doi: ""                 # fill in on acceptance
+  # journal: ""             # fill in on acceptance

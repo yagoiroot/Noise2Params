@@ -1,0 +1,56 @@
+# Noise2Params public code — Python dependencies.
+#
+# Two (partially overlapping) environments are recommended:
+#
+#   * Analysis / dataset-construction env: everything below except the
+#     learned-metric extras (lpips, dreamsim, pyiqa).  This is what
+#     noise2params.noise_image.synthetic_data_base_maker and friends run
+#     under.  CPU-only is fine.
+#
+#   * Training env: only what noise2image/train_synthetic_6.py imports.
+#     A CUDA-enabled PyTorch wheel matching your driver is required here;
+#     see README.md for the known-good denoising-diffusion-pytorch /
+#     torchmetrics pins we had to apply.
+#
+# Hard version pins: do NOT upgrade numpy beyond 1.26.x — the numba
+# kernels in noise2params/prob_models.py are compiled against numba
+# 0.59, which requires numpy < 1.27.  Upgrading will either break
+# imports or (worse) silently produce incorrect results in the
+# saddle-point computations due to NEP 50 type-promotion changes.
+
+# --- Core numerical stack (pinned) ---
+numpy==1.26.4
+numba==0.59.1
+scipy==1.13.1
+
+# --- Event-data I/O ---
+polars==1.32.2
+h5py~=3.10.0
+
+# --- Imaging / plotting ---
+Pillow
+matplotlib==3.10.5
+scikit-image==0.20.0
+opencv-python~=4.8.1.78
+
+# --- Deep learning (training env) ---
+torch               # install the CUDA-enabled wheel matching your driver
+torchvision
+torchmetrics<1.8.0
+lightning~=2.1.0
+denoising-diffusion-pytorch==1.10.7
+einops
+
+# --- Misc ---
+sympy
+mpmath
+tqdm
+
+# --- Image-similarity metrics (optional; used by compare_image_metrics) ---
+piq
+# lpips                 # pip install lpips
+# dreamsim              # pip install dreamsim
+# pyiqa                 # pip install pyiqa  (for the PieAPP metric only)
+# Uncomment the three above if you want the LPIPS / DreamSim / DISTS /
+# PieAPP deep-learning metrics.  Each pulls in its own trained weights
+# and is only imported lazily inside the relevant metric function.

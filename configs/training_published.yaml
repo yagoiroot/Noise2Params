@@ -1,0 +1,56 @@
+# Noise2Params — CNN training hyperparameters as used for the paper.
+#
+# These are the values passed to noise2image/train_synthetic_6.py (via
+# scripts/03_train_cnn.py or directly) for each of the three published
+# CNN variants.  See docs/PAPER_CROSSREF.md for which paper table / figure
+# each variant appears in.
+
+common:
+  # The Python package training environment (WSL / Linux strongly
+  # recommended; see README.md).
+  format: memmap
+  batch_size: 2                 # See README.md caveat about batch_size > 2.
+  num_workers: 1
+  prefetch_factor: 1
+  mixed_precision: true         # fp16
+  integration_time: 5           # seconds; fed into the model's time head
+  # val_data_folders is the real-noise validation set built from the
+  # DIV2K-based OOD recordings (validation_5e6_5).
+  val_data_folders: [./data/validation_5e6_5]
+
+# Synthetic-only saddle-point CNN.  Trained on data_5e6_5.
+saddle_synthetic:
+  data_folder: ./data/data_5e6_5
+  num_epochs: 40
+  lr: 2e-5                      # lower LR for synthetic-only
+
+# Synthetic-only Gaussian CNN.  Trained on data_5e6_6 (Gaussian synth).
+gaussian_synthetic:
+  data_folder: ./data/data_5e6_6
+  num_epochs: 40
+  lr: 2e-5
+
+# Real-data CNN.  Trained on data_real_5e6_2 (real recordings).
+real_only:
+  data_folder: ./data/data_real_5e6_2
+  num_epochs: 40
+  lr: 5e-5                      # higher LR than synthetic-only, to reduce
+                                # overfitting to experimental noise
+
+# Mixed CNN used for the paper's best result.  Produced by fine-tuning
+# the saddle-synthetic checkpoint on real data; see the paper's methods
+# section for exact schedule.
+mixed:
+  data_folder: ./data/data_real_5e6_2
+  num_epochs: 40
+  lr: 5e-5
+  # resume_from: ./lightning_logs/saddle_synthetic/version_X/checkpoints/last.ckpt
+
+# Notes on environment pinning that caused us trouble:
+#   * Python 3.11
+#   * denoising-diffusion-pytorch==1.10.7  (newer versions broke attention)
+#   * torchmetrics<1.8.0                   (newer versions broke PSNR signature)
+#   * numpy 1.26.4, numba 0.59.1, scipy 1.13.1  (shared with noise2params
+#     analysis env; required by numba JITs in prob_models.py)
+#   * CUDA-enabled torch wheel matching the host GPU driver.
+# See README.md for the full cautionary note.
