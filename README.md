@@ -89,7 +89,10 @@ this repository (the folder that contains this `README.md`).
 
 ### 2. Get the dataset
 
-The dataset is distributed separately as a single archive.  Download
+The dataset is distributed separately as a single archive. Currently, 
+it can be found at [here](https://www.dropbox.com/scl/fo/7tqcsk8pl4sjvc04h2wpo/APqD5WtvICuBohMUXwrJP2U?rlkey=rrmzer25n9p5zesmgbd5ilzel&st=aiex1pgl&dl=0), 
+but this is a temporary location. A more perminant repository 
+for the data will be found pending publication.Download
 and extract it.  The extracted layout is documented in
 `docs/DATA.md`; in summary:
 
