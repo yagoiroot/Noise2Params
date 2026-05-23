@@ -1,5 +1,11 @@
 # Noise2Params — Public Reconstruction Code
 
+<p align="center">
+    <a style="text-decoration:none !important;" href="https://arxiv.org/abs/2605.16317" alt="arXiv"> <img src="https://img.shields.io/badge/arXiv-preprint-b31b1b.svg?logo=arxiv" /></a>
+    <a style="text-decoration:none !important;" href="https://doi.org/10.57760/sciencedb.35825" alt="DOI"><img src="https://img.shields.io/badge/Dataset-ScienceDB-fedcba.svg?style=flat" /></a>
+    <a style="text-decoration:none !important;" href="https://www.dropbox.com/scl/fo/7tqcsk8pl4sjvc04h2wpo/APqD5WtvICuBohMUXwrJP2U?rlkey=rrmzer25n9p5zesmgbd5ilzel&st=aiex1pgl&dl=0" alt="DOI"><img src="https://img.shields.io/badge/Dataset-Mirror-badcba.svg?logo=dropbox" /></a>
+</p>
+
 Public-facing subset of the code accompanying the paper
 
 > O. Root, J. Mujo, M. Xu.  **Noise2Params: Unification and Parameter
@@ -89,11 +95,11 @@ this repository (the folder that contains this `README.md`).
 
 ### 2. Get the dataset
 
-The dataset is distributed separately as a single archive. Currently, 
-it can be found at [here](https://www.dropbox.com/scl/fo/7tqcsk8pl4sjvc04h2wpo/APqD5WtvICuBohMUXwrJP2U?rlkey=rrmzer25n9p5zesmgbd5ilzel&st=aiex1pgl&dl=0), 
-but this is a temporary location. A more perminant repository 
-for the data will be found pending publication.Download
-and extract it.  The extracted layout is documented in
+The dataset is distributed separately as a single archive. The dataset can found at the following locations:
+* ScienceDB permanant [repository](https://doi.org/10.57760/sciencedb.35825).
+* Temporary DropBox [mirror](https://www.dropbox.com/scl/fo/7tqcsk8pl4sjvc04h2wpo/APqD5WtvICuBohMUXwrJP2U?rlkey=rrmzer25n9p5zesmgbd5ilzel&st=aiex1pgl&dl=0)
+
+Download and extract it.  The extracted layout is documented in
 `docs/DATA.md`; in summary:
 
 ```
