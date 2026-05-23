@@ -413,7 +413,7 @@ SDPA fallback for Windows) and in the non-learned data pipeline in
 
 ## Citation
 
-See `CITATION.cff`.
+See `CITATION.cff` or `CITATION.bib`.
 
 ## License
 
